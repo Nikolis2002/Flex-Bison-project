@@ -1,6 +1,6 @@
 %option noyywrap
 %{
-    #include "xmlBison.tab.h"
+    #include "Bison.tab.h"
     #include<stdio.h>
     #include<ctype.h>
     #define YY_DECL int yylex()
