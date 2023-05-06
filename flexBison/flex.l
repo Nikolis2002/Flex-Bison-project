@@ -79,13 +79,13 @@ END22 "/>"
 <ANDROID>[^\"]+ {yylval.strval=strdup(yytext); return UNKNOWN;}
 
 <WIDTH>(wrap_content|match_parent|[0-9]+)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_LAYOUT_WIDTH; }
-<WIDTH>[^\"]+ {yylval.strval=strdup(yytext); printf("%s\n",yytext); return ANDROID_LAYOUT_ERROR;}
+<WIDTH>[^\"]+ {yylval.strval=strdup(yytext);return ANDROID_LAYOUT_ERROR;}
 
 <HEIGHT>(wrap_content|match_parent|[0-9]+)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_LAYOUT_HEIGHT; }
 <HEIGHT>. {yylval.strval=strdup(yytext); return ANDROID_LAYOUT_ERROR;}
 
 <PADDING>([0-9]+)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_PADDING; }
-<PADDING>[^\"]+ {yylval.strval=strdup(yytext); printf("%s\n",yytext); return PADDING_ERROR;}
+<PADDING>[^\"]+ {yylval.strval=strdup(yytext); return PADDING_ERROR;}
 
 "<!--" {BEGIN(COMMENT);}
 <COMMENT>[^-]+ {/*ignoring the comment*/}
