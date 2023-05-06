@@ -48,32 +48,29 @@
 
 %%
 xml: linear_layout{printf("The file is correct goodbye\n");
-                    print(arr,size);
-                    print(radio_arr,size2);
-                    printf("%d\n",radio_count);}
     |relative_layout{printf("The file is correct goodbye\n");}
     ;
 
-linear_layout: LINEAR_START mad_feats linear_optional END1 linear_layout_attributes END_LINEAR {printf("linear_layout\n"); }
+linear_layout: LINEAR_START mad_feats linear_optional END1 linear_layout_attributes END_LINEAR {}
              ;
 
 
 linear_layout_attributes: elements 
-                        | elements linear_layout_attributes {printf("linear_layout_attr\n");}
+                        | elements linear_layout_attributes {}
                         ;
 
-linear_optional: android_id { printf("linear_opt1\n");}
-               | android_orientation { printf("linear_opt2\n");}
-               | android_id android_orientation { printf("linear_opt3\n");}
+linear_optional: android_id {}
+               | android_orientation {}
+               | android_id android_orientation {}
                | android_id UNKNOWN{ yyerror("expecting 'android:orientation=(string)'"); }
-               | android_orientation android_id {printf("linear_opt5\n");}
+               | android_orientation android_id {}
                | android_orientation UNKNOWN{yyerror("expecting 'android:id=(string)'");}
                | UNKNOWN{ yyerror("expecting 'android:orientation=(string)' or 'android:id=(string)'");}
-               | %empty{printf("linear_opt6\n");}
+               | %empty{}
                ;
 
-relative_layout: RELATIVE_START mad_feats relative_optional END1  END_RELATIVE {printf("Relative_layout1\n");}
-               | RELATIVE_START mad_feats relative_optional END1 relative_attributes END_RELATIVE {printf("Relative_layout2\n"); }
+relative_layout: RELATIVE_START mad_feats relative_optional END1  END_RELATIVE {}
+               | RELATIVE_START mad_feats relative_optional END1 relative_attributes END_RELATIVE {}
 
 
 relative_attributes: elements 
@@ -86,26 +83,26 @@ relative_optional: android_id
                  ;
 
 
-elements: textview {printf("text_View_ele\n");}
-        | imageview {printf("image_view_ele\n");}
-        | button {printf("button_ele\n");}
-        | radiogroup {printf("radiogroup_ele\n");}
-        | linear_layout {printf("linear_layout_ele\n");}
-        | relative_layout {printf("relative_layout_ele\n");}
-        | progress_bar {printf("progress_bar_ele\n");}
+elements: textview {}
+        | imageview {}
+        | button {}
+        | radiogroup {}
+        | linear_layout {}
+        | relative_layout {}
+        | progress_bar {}
         ;
 
 textview: TEXTVIEW_START mad_feats textview_optional android_text END2 
         ;
 
-textview_optional: android_id {printf("textView_opt1\n");}
-                 | text_color {printf("textView_opt2\n");}
-                 | android_id text_color {printf("textView_opt3\n");}
-                 | text_color android_id {printf("textView_opt4\n");}
+textview_optional: android_id {}
+                 | text_color {}
+                 | android_id text_color {}
+                 | text_color android_id {}
                  | UNKNOWN{yyerror("expecting 'android:id=(string)' or 'android:textColor=(string)'");}
                  | android_id UNKNOWN {yyerror("expecting 'android:textColor=(string)'");}
                  | text_color UNKNOWN {yyerror("expecting 'android:id=(string)'");}
-                 | %empty {printf("textView_opt6\n");}
+                 | %empty {}
                  ;
 
 imageview: IMAGEVIEW_START mad_feats android_src button_id_optional END2 ;
@@ -208,21 +205,18 @@ mad_feats: ANDROID_LAYOUT_WIDTH ANDROID_LAYOUT_HEIGHT {}
 
 
 android_id: ANDROID_ID {add_id(&arr,&size,yylval.strval);
-                            printf("THE SIZE IS:%d\n",size);
-                            
+                                                      
                             if(id_compare(arr,size)==0)
                             {
                                 mode=1;
                                 yyerror("'android_id' should be unique");
                             }
-                            
                             $$=$1;
-                            printf("android_id\n");}
-
+                       }
           ;
 
 
-android_orientation: ANDROID_ORIENTATION {printf("android_orie\n");} 
+android_orientation: ANDROID_ORIENTATION {} 
                    ;
 
 
@@ -237,10 +231,10 @@ text_color: ANDROID_TEXT_COLOR {$$=$1;}
 android_text: ANDROID_TEXT
 
 
-android_max: ANDROID_MAX {max=atoi($1); printf("max=%d\n",max);}
+android_max: ANDROID_MAX {max=atoi($1);}
             ;
 
-android_padding: PADDING_ERROR {printf("Billkourt has here\n"); mode=1; yyerror("padding should be only a positive integer");} 
+android_padding: PADDING_ERROR {mode=1; yyerror("padding should be only a positive integer");} 
                | ANDROID_PADDING 
                ;
 
@@ -250,7 +244,7 @@ android_src: ANDROID_SRC
 android_checkButton: ANDROID_CHECKBUTTON {$$=$1; line_button=yylineno; checkedButton=$1;} 
     ;
 
-android_progress: ANDROID_PROGRESS {progress=atoi($1); printf("progress=%d\n",progress);} 
+android_progress: ANDROID_PROGRESS {progress=atoi($1);} 
     ;
 
 
@@ -363,13 +357,3 @@ int progress_max(int max,int progress)
     
     return 0;
 }
-
-void print(char **arr,int size)
-{
-    printf("[ ");
-  for (int i = 0; i < size; i++) {
-    printf("string %d: %s\n",i+1,arr[i]);
-  }
-  printf("]\n");
-}
-
