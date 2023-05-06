@@ -1,0 +1,5 @@
+<xml> ::= <linear_layout> | <relative_layout>
+
+<linear_layout> ::= "<LinearLayout" <mad_feats> <linear_optional> ">" <linear_layout_attributes> "</LinearLayout>"
+
+<linear_layout_attributes> ::= <elements> | 
