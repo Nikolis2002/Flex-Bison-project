@@ -198,7 +198,7 @@ bar_options: android_id
 mad_feats: ANDROID_LAYOUT_WIDTH ANDROID_LAYOUT_HEIGHT {}
          | ANDROID_LAYOUT_HEIGHT ANDROID_LAYOUT_WIDTH {}
          | ANDROID_LAYOUT_HEIGHT UNKNOWN {yyerror("expecting 'android:layout_width=(string)'");}
-         | ANDROID_LAYOUT_WIDTH UNKNOWN {yyerror("expecting 'android:layout_heigh=(string)'");}
+         | ANDROID_LAYOUT_WIDTH UNKNOWN {yyerror("expecting 'android:layout_height=(string)'");}
          | UNKNOWN {yyerror("expecting 'android:layout_width=(string)' or 'android:layout_height=(string)'");}
          | ANDROID_LAYOUT_ERROR { mode=1; yyerror("Not accepted value, accepts 'wrap_content',\n'match_parent' or positive integer");}
          ;
