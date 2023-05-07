@@ -41,7 +41,7 @@
 %token<strval> ANDROID_ID ANDROID_ORIENTATION ANDROID_LAYOUT_WIDTH ANDROID_LAYOUT_HEIGHT ANDROID_TEXT ANDROID_TEXT_COLOR ANDROID_CHECKBUTTON ANDROID_PADDING ANDROID_SRC;
 %token<strval> ANDROID_PROGRESS ANDROID_MAX ANDROID_COUNT 
 %token END_LINEAR  END1 END2 RADIOGROUP_END END_RELATIVE
-%token<strval>  UNKNOWN ANDROID_LAYOUT_ERROR PADDING_ERROR
+%token<strval>  UNKNOWN ANDROID_LAYOUT_ERROR PADDING_ERROR //error_tokens
 %type<strval> android_id mad_feats android_orientation android_text text_color android_checkButton android_padding android_src 
 %type<strval> android_max android_progress android_count
 %start xml
@@ -127,7 +127,18 @@ radiogroup:RADIOGROUP_START mad_feats android_count radiogroup_optional END1 rad
                                                                                                 mode=1;
                                                                                                 yyerror("'android:checkedButton' value is different from 'android:id'");
                                                                                             }
-
+                                                                                            if(radio_checker!=radio_count)
+                                                                                            {
+                                                                                                yylineno=line_radioButton;
+                                                                                                mode=1;
+                                                                                                yyerror(" 'android:count' is different by the number of 'RadioButton' elements");
+                                                                                            }
+                                                                        
+                                                                                            printf("this is moua %d\n",radio_count);
+                                                                                            radio_count=0;
+                                                                                            free(radio_arr);
+                                                                                            *radio_arr=NULL;
+                                                                                            size2=0;
                                                                                         }
                                                                                         ;
 
@@ -142,15 +153,8 @@ radiogroup_optional:android_id
                   | %empty
                   ;
 
-radiobutton_repeat: radiobutton {radio_count++; }
-                  | radiobutton radiobutton_repeat {if(radio_checker==radio_count)
-                                                        {
-                                                         yylineno=line_radioButton;
-                                                         mode=1;
-                                                         yyerror(" 'android:count' is different by the number of 'RadioButton' elements");
-                                                        }
-                                                         
-                                                         radio_count++; }
+radiobutton_repeat: radiobutton { radio_count++; }
+                  | radiobutton radiobutton_repeat {  radio_count++;}
                   ;  
 
 radiobutton: RADIOBUTTON_START mad_feats radiobutton_optional android_text END2
@@ -356,4 +360,13 @@ int progress_max(int max,int progress)
     }   
     
     return 0;
+}
+
+void print(char **arr,int size)
+{
+    printf("[ ");
+  for (int i = 0; i < size; i++) {
+    printf("string %d: %s\n",i+1,arr[i]);
+  }
+  printf("]\n");
 }
