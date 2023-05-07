@@ -88,16 +88,15 @@ END22 "/>"
 <PADDING>[^\"]+ {yylval.strval=strdup(yytext); return PADDING_ERROR;}
 
 "<!--" {BEGIN(COMMENT);}
-<COMMENT>[^-]+ {/*ignoring the comment*/}
-<COMMENT>-*[^>] {yyerror_at_line(yylineno,"Encountered \"--\" inside the comment");}
-<COMMENT>-{0,1}[>] {yyerror_at_line(yylineno,"incorrect coomment form");}
 <COMMENT>"-->" {BEGIN(INITIAL);}
+<COMMENT>--[^>] {yyerror_at_line(yylineno,"Encountered \"--\" inside the comment");}
+<COMMENT>-{0,1}[>] {yyerror_at_line(yylineno,"incorrect comment form");}
+<COMMENT>. {/*ignoring the comment*/} 
 <INITIAL>{END11} {yylval.strval=strdup(yytext); return END1;}
 <INITIAL>{END22} {yylval.strval=strdup(yytext); return END2;}
 [\t\f\r" "]+ {}
 [\n] {yylineno++;}
 . {return UNKNOWN;}
-
 
 %%
 
