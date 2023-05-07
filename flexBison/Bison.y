@@ -267,7 +267,7 @@ int main(int argc,char *argv[])
     
     char c;
     int count=1;
-    printf("%d ",count++);
+    printf("%d: ",count++);
     rewind(yyin);
     while((c=fgetc(yyin))!=EOF)
     {   
