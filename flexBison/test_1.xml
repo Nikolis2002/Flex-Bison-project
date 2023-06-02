@@ -1,0 +1,168 @@
+  <RelativeLayout
+        android:layout_width="20"
+        android:layout_height="20">
+
+    <RadioGroup
+        android:layout_width="10"
+        android:layout_height="wrap_content"
+        android:count="5">
+        <!-- this is a test -->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="RB1"
+            android:text="Option 1"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="RB3"
+            android:text="Option 2"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="RB2"
+            android:text="Option 2"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="RB4"
+            android:text="Option 2"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="RB5"
+            android:text="Option 2"/>
+
+    </RadioGroup>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="image_name"
+        android:padding="50"/>
+
+    <TextView
+        android:layout_width="20"
+        android:layout_height="20"
+        android:id="blah_1"
+        android:textColor="hello"
+        android:text="Dummy text"/>
+
+    
+    <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="0"/>
+    
+    <LinearLayout
+    android:layout_height="20"
+    android:layout_width="20"
+    android:id="blah"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="20"
+        android:layout_height="20">
+
+    <RadioGroup
+        android:layout_width="20"
+        android:layout_height="wrap_content"
+        android:count="5"
+        android:checkedButton="ggpistiolas">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="gg2"
+            android:text="Option 1"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="gg1"
+            android:text="Option 2"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="gg3"
+            android:text="Option 2"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="gg4"
+            android:text="Option 2"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="gg5"
+            android:text="Option 2"/>
+
+    </RadioGroup>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="image_name"
+        android:padding="50"/>
+
+    <TextView
+        android:layout_width="20"
+        android:layout_height="20"
+        android:id="pistiolas_1"
+        android:textColor="hello"
+        android:text="Dummy text"/>
+
+    
+    <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="0"/>
+
+<LinearLayout
+    android:layout_height="20"
+    android:layout_width="20"
+    android:id="pistiolas_2"
+    android:orientation="vertical">
+
+    <RelativeLayout
+    android:layout_width="20"
+    android:layout_height="wrap_content" >
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="image_name"
+        android:padding="50"/>
+
+    <TextView
+        android:layout_width="20"
+        android:layout_height="20"
+        android:id="pistiolas_2blah_1"
+        android:textColor="hello"
+        android:text="Dummy text"/>
+
+    
+    <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="0"/>
+    
+
+</LinearLayout>
+    
+
+</LinearLayout>
+    
+</RelativeLayout>
