@@ -2,4 +2,70 @@
 
 <linear_layout> ::= "<LinearLayout" <mad_feats> <linear_optional> ">" <linear_layout_attributes> "</LinearLayout>"
 
-<linear_layout_attributes> ::= <elements> | 
+<linear_layout_attributes> ::= <elements> | <elements linear_layout_attributes>
+
+<linear_optional> ::= <android_id> | <android_orientation> | <android_id>  <android_orientation> | <android_orientation> <android_id> | <empty>
+
+<relative_layout> ::= "<RelativeLayout" <mad_feats> <relative_optional> ">" "</RelativeLayout>" | "<RelativeLayout" <mad_feats> <relative_optional> ">" <relative_attributes "</RelativeLayout>"
+
+<relative_attributes> ::= <elements> | <elements>  <relative_attributes>
+
+<relative_optional> ::= <android_id> | <empty> 
+
+<elements> ::= <textview> | <imageview> | <button> | <radiogroup> | <linear_layout> | <relative_layout> | <progress_bar> 
+
+<textview> ::= "<TextView" <mad_feats> <textview_optional> <android_text> "/>"
+
+<textview_optional> ::= <android_id> | <text_color> | <android_id> <text_color> | <text_color> <android_id> | <empty>
+
+<imageview> ::= "<ImageView" <mad_feats> <android_src> <button_id_optional> "/>"
+
+<button> ::= "<Button" <mad_feats> <android_text> <button_id_optional> "/>"
+
+<button_id_optional> ::= <android_id> | <android_padding> | <android_id> <android_padding> | <android_padding> <android_id> | <empty>
+
+<radiogroup> ::= "<RadioGroup" <mad_feats> <android_count> <radiobutton_optional> ">" <radiobutton_repeat> "</RadioGroup>"
+
+<radiogroup_optional> ::= <android_id> | <android_checkButton> | <android_id> <android_checkButton> | <android_checkButton> <android_id> | <empty>
+
+<radiobutton_repeat> ::= <radiobutton> | <radiobutton> <radiobutton_repeat> 
+
+<radiobutton> ::= "<RadioButton" <mad_feats> <radiobutton_optional> <android_text> "/>"
+
+<radiobutton_optional> ::= <android_id> | <empty>
+
+<progress_bar> ::= "<ProgressBar" <mad_feats> <bar_options> "/>"
+
+<bar_options> ::= <android_id> | <android_max> | <android_progress> | <android_id> <android_max> | <android_id> <android_progress> | <android_max> <android_id> | <android_max> <android_progress> | <android_progress> <android_id> | <android_progress> <android_max> | <android_id> <android_max> <android_progress> | <android_id> <android_progress> <android_max> | <android_max> <android_id> <android_progress> | <android_max> <android_progress> <android_id> | <android_progress> <android_id> <android_max> | <android_progress> <android_max> <android_id> | <empty>
+
+<mad_feats> ::= "layout_width=" <string_integer> "layout_height=" <string_integer>| "layout_height=" <string_integer> "layout_width=" <string_integer>
+
+<android_id> ::=  "id=" <string>
+
+<android_orientation> ::= "orientation=" <string>
+
+<android_count> ::= "count="
+
+<text_color> ::= "textColor=" <string>
+
+<android_text> ::= "text=" <string>
+
+<android_max> ::= "max=" <integer>
+
+<android_padding> ::= "padding=" <integer>
+
+<android_src> ::= "src=" <string>
+
+<android_checkButton> ::= "checkedButton=" <string>
+
+<android_progress> ::= "progress=" <number>
+
+<empty> ::= " "
+
+<string_integer> ::= <string> | <integer>				
+								
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+<integer> ::= <digit> | <integer> <digit>
+
+<char> ::= "a" | "b" | ... | "z" | "A" | "B" | ... | "Z" | "0" | "1" | ... | "9"
+<string> ::= <char>|<string><char>
