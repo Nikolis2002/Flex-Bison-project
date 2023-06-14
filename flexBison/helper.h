@@ -60,6 +60,10 @@ int checkedButton_checker(char **arr, int size, char *string)
 
 int progress_max(int max, int progress)
 {
+    if(progress==0 || max==0){
+        return 0;
+    }
+
     if (progress > max)
     {
         return 1;

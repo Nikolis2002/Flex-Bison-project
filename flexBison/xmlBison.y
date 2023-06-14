@@ -171,6 +171,8 @@ progress_bar: BAR_START mad_feats bar_options END2 {if(progress_max(max,progress
                                                           yyerror("the value of 'android:progress'is larger than 'android:max'");
                                                           YYABORT;
                                                          }
+                                                         progress=0;
+                                                         max=0;
                                                     }
             ;
 

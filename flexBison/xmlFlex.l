@@ -52,15 +52,15 @@ END22 "/>"
 <ANDROID>layout_height=\" { yylval.strval=strdup(yytext); BEGIN(HEIGHT);}
 <ANDROID>text=\"[^\n\"]+\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_TEXT;}
 <ANDROID>textColor=\"[^\n\"]+\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_TEXT_COLOR;}
-<ANDROID>progress=\"[0-9]+\" {char *tmp=strdup(yytext+strlen("progress:\"")); 
+<ANDROID>progress=\"[1-9][0-9]*\" {char *tmp=strdup(yytext+strlen("progress:\"")); 
                               tmp[strlen(tmp) - 1] = '\0';
                               yylval.strval=strdup(tmp);
                               BEGIN(INITIAL);return ANDROID_PROGRESS;}
 
-<ANDROID>max=\"[0-9]+\" {
+<ANDROID>max=\"[1-9][0-9]*\" {
                             char *tmp=strdup(yytext+strlen("max=\"")); 
                             tmp[strlen(tmp) - 1] = '\0';
-                           yylval.strval=strdup(tmp);
+                            yylval.strval=strdup(tmp);
                             BEGIN(INITIAL); return ANDROID_MAX;}
 
 
@@ -73,7 +73,7 @@ END22 "/>"
 <ANDROID>padding=\" {BEGIN(PADDING); }
 <ANDROID>src=\"[^\n\"]+\" {BEGIN(INITIAL); return ANDROID_SRC;}
 
-<ANDROID>count=\"[0-9]+\" { char *tmp=strdup(yytext+strlen("count=\"")); 
+<ANDROID>count=\"[1-9][0-9]*+\" { char *tmp=strdup(yytext+strlen("count=\"")); 
                             tmp[strlen(tmp) - 1] = '\0';
                             yylval.strval=strdup(tmp);
                             BEGIN(INITIAL); return ANDROID_COUNT;}
@@ -86,7 +86,7 @@ END22 "/>"
 <HEIGHT>(wrap_content|match_parent|[0-9]+)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_LAYOUT_HEIGHT; } /*same as above*/
 <HEIGHT>. {yylval.strval=strdup(yytext); return ANDROID_LAYOUT_ERROR;}
 
-<PADDING>([0-9]+)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_PADDING; }
+<PADDING>([1-9][0-9]*)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_PADDING; }
 <PADDING>[^\"]+ {yylval.strval=strdup(yytext); return PADDING_ERROR;}
 
 <INITIAL>"<!--" {BEGIN(COMMENT);} /*the condtion that finds the comments*/
