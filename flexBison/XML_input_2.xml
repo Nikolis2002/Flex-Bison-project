@@ -25,7 +25,7 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:max="0"
+        android:max="3"
         android:progress="2" />
     <!-- This is another comment -->
     <LinearLayout
