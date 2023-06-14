@@ -57,7 +57,7 @@
     <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="0"/>
+            android:max="10"/>
     <!-- This is another comment -->
     <LinearLayout
     android:layout_height="20"
@@ -126,7 +126,7 @@
     <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="0"/>
+            android:max="15"/>
 
 <LinearLayout
     android:layout_height="20"
@@ -157,7 +157,7 @@
     <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="0"/>
+            android:max="7"/>
     
 
 </LinearLayout>
