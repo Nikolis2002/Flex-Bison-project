@@ -6,7 +6,7 @@
         android:layout_width="10"
         android:layout_height="wrap_content"
         android:count="5">
-        <!-- this is a test -->
+        <!-- This is a comment -->
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:max="0"/>
-    
+    <!-- This is another comment -->
     <LinearLayout
     android:layout_height="20"
     android:layout_width="20"
@@ -73,7 +73,7 @@
         android:layout_width="20"
         android:layout_height="wrap_content"
         android:count="5"
-        android:checkedButton="ggpistiolas">
+        android:checkedButton="gg2">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
 
 </LinearLayout>
     
-
+<!-- This is the last comment -->
 </LinearLayout>
     
 </RelativeLayout>

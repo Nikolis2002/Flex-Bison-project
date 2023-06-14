@@ -47,8 +47,8 @@
 %start xml
 
 %%
-xml: linear_layout{printf("The file is correct goodbye\n");}
-    |relative_layout{printf("The file is correct goodbye\n");}
+xml: linear_layout{}
+    |relative_layout{}
     ;
 
 linear_layout: LINEAR_START mad_feats linear_optional END1 linear_layout_attributes END_LINEAR {}
