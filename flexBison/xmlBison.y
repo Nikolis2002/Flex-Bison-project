@@ -15,7 +15,7 @@
     int size2=0;
     int line_button=0;
     int line_radioButton=0;
-    int max=100; //default max
+    int max=0; 
     int progress=0;
     char* error_message;
     char **arr;
