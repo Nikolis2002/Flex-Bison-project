@@ -12,37 +12,37 @@ extern void print_err_program(FILE *yyin, int line);
 int fileLinesSize(FILE *file);
 void copyString(const char *source, char **destination);
 
-void add_id(char ***arr, int *size, const char *value)
+void add_id(char ***arr, int *size, const char *value) // this is a conntainer like type funnctionn from c++
 {
-    if (*arr == NULL || *size == 0)
+    if (*arr == NULL || *size == 0) // basically we make space for an array
     {
         *arr = (char **)malloc(sizeof(char *));
         *size = 1;
     }
-    else if (*size > 0)
+    else if (*size > 0) // annd each time we put a new id we realloc the space +1 inn order for the new value to fit
     {
         *arr = (char **)realloc(*arr, (*size + 1) * sizeof(char *));
         (*size)++;
     }
 
-    (*arr)[*size - 1] = (char *)malloc(strlen(value) + 1);
+    (*arr)[*size - 1] = (char *)malloc(strlen(value) + 1); // then we copy the value of the string(double pointers are needed beause basically this is a 2d array and its poinnter points into a string)
     strcpy((*arr)[*size - 1], value);
 }
 
 int id_compare(char **arr, int size)
 {
-    if (size == 1)
+    if (size == 1) // if size is 1 it only has onne value no need to check
         return 1;
 
     for (int i = 0; i < size - 1; i++)
     {
-        if (strcmp(arr[size - 1], arr[i]) == 0)
-            return 0;
+        if (strcmp(arr[size - 1], arr[i]) == 0) // we compare its elemennt ot the lst to see if they are unique
+            return 0;                           // f not we returnn 0
     }
     return 1;
 }
 
-int checkedButton_checker(char **arr, int size, char *string)
+int checkedButton_checker(char **arr, int size, char *string) // similar as above but we compare a string to evry elemnt of an array
 {
     if (size == 0)
         return 1;
@@ -58,7 +58,7 @@ int checkedButton_checker(char **arr, int size, char *string)
     return 0;
 }
 
-int progress_max(int max, int progress)
+int progress_max(int max, int progress)// basic comparsionn to see which is bigger
 {
     if(progress==0 || max==0){
         return 0;
@@ -72,7 +72,7 @@ int progress_max(int max, int progress)
     return 0;
 }
 
-void print(char **arr, int size)
+void print(char **arr, int size) // helper function if you want to see the elementns of the arrays
 {
     printf("[ ");
     for (int i = 0; i < size; i++)
@@ -82,9 +82,9 @@ void print(char **arr, int size)
     printf("]\n");
 }
 
-void print_program(FILE *yyin)
+void print_program(FILE *yyin) // prints the whole program(when the parser is successful)
 {
-    fseek(yyin, 0, SEEK_SET);
+    fseek(yyin, 0, SEEK_SET); // reset the file pointer
 
     int count = 1;
     printf("%d: ", count++);
@@ -107,22 +107,22 @@ void print_program(FILE *yyin)
     printf("\n");
 }
 
-extern void print_err_program(FILE *yyin, int line)
+extern void print_err_program(FILE *yyin, int line) // simlar as above but we print until the line(basically until yylinneno )
 {
 
     int char_size = fileLinesSize(yyin);
     fseek(yyin, 0, SEEK_SET);
     int count = 1;
     int num = line + 1;
-    char c[char_size];
+    char c[char_size]; // the array can hold every line, so we donnt have a segmetationn fault
     while ((count < num) && (fgets(c, sizeof(c), yyin) != NULL))
     {
-        printf("%d: %s", count, c);
+        fprintf(stderr, "%d: %s", count, c);
         count++;
     }
 }
 
-int fileLinesSize(FILE *file)
+int fileLinesSize(FILE *file) // we get the longest array inn the programm to help the function above
 {
     fseek(file, 0, SEEK_SET);
     int sizeCounter = 0;

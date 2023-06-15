@@ -1,6 +1,6 @@
 %option noyywrap
 %{
-    #include "xmlBison.tab.h" //the bison header file 
+    #include "xmlBison.tab.h" //the bison header file, it also inncludes the helper header
     #include<stdio.h>
     #include<ctype.h>
     #define YY_DECL int yylex() //declaring the yylex
@@ -25,8 +25,8 @@ RADIOG_START "<RadioGroup"
 RADIOG_END "</RadioGroup>"
 RADIOB_START "<RadioButton"
 B_START "<ProgressBar"
-END11 ">"
-END22 "/>"
+ELEM_END ">"
+ATR_END "/>"
 
 %%
 <INITIAL>{START_L} {yylval.strval=strdup(yytext); return LINEAR_START;} /*we make the yylval value equal to yytext and return the correct token*/
@@ -60,7 +60,7 @@ END22 "/>"
 <ANDROID>max=\"[1-9][0-9]*\" {
                             char *tmp=strdup(yytext+strlen("max=\"")); 
                             tmp[strlen(tmp) - 1] = '\0';
-                            yylval.strval=strdup(tmp);
+                           yylval.strval=strdup(tmp);
                             BEGIN(INITIAL); return ANDROID_MAX;}
 
 
@@ -73,17 +73,17 @@ END22 "/>"
 <ANDROID>padding=\" {BEGIN(PADDING); }
 <ANDROID>src=\"[^\n\"]+\" {BEGIN(INITIAL); return ANDROID_SRC;}
 
-<ANDROID>count=\"[1-9][0-9]*+\" { char *tmp=strdup(yytext+strlen("count=\"")); 
+<ANDROID>count=\"[1-9][0-9]*\" { char *tmp=strdup(yytext+strlen("count=\"")); 
                             tmp[strlen(tmp) - 1] = '\0';
                             yylval.strval=strdup(tmp);
                             BEGIN(INITIAL); return ANDROID_COUNT;}
 
-<ANDROID>[^\"]+ {yylval.strval=strdup(yytext); return UNKNOWN;} /*we handle more carefully the wrong input*/
+<ANDROID>[^\"]+ {yylval.strval=strdup(yytext); return UNDEFINED;} /*we handle more carefully the wrong input*/
 
-<WIDTH>(wrap_content|match_parent|[0-9]+)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_LAYOUT_WIDTH; } /*normal output*/
+<WIDTH>(wrap_content|match_parent|[1-9][0-9]*)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_LAYOUT_WIDTH; } /*normal output*/
 <WIDTH>[^\"]+ {yylval.strval=strdup(yytext);return ANDROID_LAYOUT_ERROR;} /*if it an error it retuens a special error token to print a correct error message*/
 
-<HEIGHT>(wrap_content|match_parent|[0-9]+)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_LAYOUT_HEIGHT; } /*same as above*/
+<HEIGHT>(wrap_content|match_parent|[1-9][0-9]*)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_LAYOUT_HEIGHT; } /*same as above*/
 <HEIGHT>. {yylval.strval=strdup(yytext); return ANDROID_LAYOUT_ERROR;}
 
 <PADDING>([1-9][0-9]*)\" {yylval.strval=strdup(yytext); BEGIN(INITIAL); return ANDROID_PADDING; }
@@ -95,17 +95,17 @@ END22 "/>"
 <COMMENT><<EOF>> {yyerror_at_line(yylineno,"incorrect comment form-comment doesnt finish");} /*if he doesnt close the comment its ann error*/
 <COMMENT>. {/*ignoring the comment*/} 
 <COMMENT>"-->" {BEGIN(INITIAL);} /*end the commennt*/
-<INITIAL>{END11} {yylval.strval=strdup(yytext); return END1;}
-<INITIAL>{END22} {yylval.strval=strdup(yytext); return END2;}
+<INITIAL>{ELEM_END} {yylval.strval=strdup(yytext); return END_ELEM;}
+<INITIAL>{ATR_END} {yylval.strval=strdup(yytext); return END_ATR;}
 [\t\f\r" "]+ {} /*ignoring whitespaces*/
 [\n] {yylineno++;}
-. {return UNKNOWN;} /*f the programm doesnt read any other rules it means that we have encountered an error*/
+. {return UNDEFINED;} /*f the programm doesnt read any other rules it means that we have encountered an error*/
 
 %%
 
 void yyerror_at_line(int line, const char* msg) { /*special error function that prints the program until the error and the error meassage*/
     print_err_program(yyin,line);
-    fprintf(stdout, "\nError on line %d: %s\n", line, msg);
+    fprintf(stderr, "\nError on line %d: %s\n", line, msg);
     exit(1); //exits
 }
 
