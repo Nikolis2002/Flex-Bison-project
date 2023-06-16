@@ -306,7 +306,9 @@ int main(int argc,char *argv[])
 }
 
 void yyerror(const char* s) {
-    pos_error=yylval.strval; //locationn of the error
+    if(yylval.strval!=NULL)
+        pos_error=yylval.strval; //locationn of the error
+
     copyString(s,&error_message); //copy the string to the error message inn order to print it
     
     return;
