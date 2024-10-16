@@ -1,4 +1,4 @@
-# Flex-Bison-project
-this is a flex bison program that is an analyzer for an xml pseudolangauge
+# Syntax analyzer for XML 
 
-this is billkourt programm xd(Billkourt+Nikolhs=<3)
+A simple syntax aanalyzer,that recognizes XML syntax and returns syntax errors.
+Writen in c and using flex and bison for syntax and grammar analysis.
