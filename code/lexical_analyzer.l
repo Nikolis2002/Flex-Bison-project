@@ -1,6 +1,6 @@
 %option noyywrap
 %{
-    #include "xmlBison.tab.h" //the bison header file, it also inncludes the helper header
+    #include "xmlBison.tab.h" //the bison header file, it also includes the helper header
     #include<stdio.h>
     #include<ctype.h>
     #define YY_DECL int yylex() //declaring the yylex

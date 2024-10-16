@@ -1,6 +1,6 @@
 %{
     #include<stdio.h>
-    #include<stdlib.h>//including all necessary headers and declaring all nnecessary externn varianbles and fuctions
+    #include<stdlib.h>//including all necessary headers and declaring all nnecessary extern variables and fuctions
     #include<string.h>
     #include"helper.h" //our own header that has fuctions that help the main programm
     extern int yylex();
